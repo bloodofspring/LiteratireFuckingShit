@@ -21,6 +21,9 @@ class TitleScreen(AbstractScreen):
         self.jumping: bool = False
         self.jump_counter = 0
 
+        self.title_text_1 = pygame.font.Font("static/fonts/pixelFont.TTF", 190).render("ВИКТОРИНА", True, (0, 0, 0))
+        self.title_text_2 = pygame.font.Font("static/fonts/pixelFont.TTF", 49).render('по роману в стихах "Евгений Онегин"', True, (0, 0, 0))
+
     def handle_events(self, events) -> None:
         for event in events:
             match event.type:
@@ -45,12 +48,14 @@ class TitleScreen(AbstractScreen):
         rendered_text = self.welcome_text_font.render("Press  Enter  to  start", True, (0, 0, 0))
         self.welcome_text_alpha = (self.welcome_text_alpha + self.alpha_change_delta) % 256
         rendered_text.set_alpha(self.welcome_text_alpha)
-        self.screen.blit(rendered_text, (260, 370))
+        self.screen.blit(rendered_text, (190, 450))
 
     def update(self, events, **kwargs) -> None:
         self.handle_events(events)
 
         self.screen.fill((255, 255, 255))
         self.screen.blit(self.background, (0, 0))
+        self.screen.blit(self.title_text_1, (25, 30))
+        self.screen.blit(self.title_text_2, (25, 220))
 
         self.update_welcome_text()
