@@ -1,5 +1,6 @@
 import pygame
 
+from screens.chooseDifficulty import ChooseDifficultyScreen
 from screens.abstract import AbstractScreen
 from util import load_image
 from constants import window_width, window_height
@@ -18,9 +19,6 @@ class TitleScreen(AbstractScreen):
         self.flicker_frequency = 1
         self.alpha_change_delta: int = 5
 
-        self.jumping: bool = False
-        self.jump_counter = 0
-
         self.title_text_1 = pygame.font.Font("static/fonts/pixelFont.TTF", 190).render("ВИКТОРИНА", True, (0, 0, 0))
         self.title_text_2 = pygame.font.Font("static/fonts/pixelFont.TTF", 49).render('по роману в стихах "Евгений Онегин"', True, (0, 0, 0))
 
@@ -30,7 +28,7 @@ class TitleScreen(AbstractScreen):
                 case pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
                         pass
-                        # self.runner.change_screen(TeamChoosingScreen(screen=self.screen, runner=self.runner))
+                        self.runner.change_screen(ChooseDifficultyScreen(screen=self.screen, runner=self.runner))
 
     def update_welcome_text(self) -> None:
         if self.runner.frame % self.flicker_frequency:
