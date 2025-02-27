@@ -27,7 +27,6 @@ class TitleScreen(AbstractScreen):
             match event.type:
                 case pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
-                        pass
                         self.runner.change_screen(ChooseDifficultyScreen(screen=self.screen, runner=self.runner))
 
     def update_welcome_text(self) -> None:

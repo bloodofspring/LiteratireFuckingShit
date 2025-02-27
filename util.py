@@ -4,6 +4,28 @@ import os
 import screens
 
 
+def print_text(screen, message, x, y, end=0, font_color=(255, 255, 255)):
+    pygame.font.init()
+    font_type = pygame.font.Font("static/fonts/pixelFont.TTF", 60)
+    text = font_type.render(message, True, font_color)
+    if end > 1:
+        words = []
+        for i in message.split():
+            words.append(i)
+            if len(" ".join(words)) > end:
+                end *= 2
+                words.append('-')
+
+        message = " ".join(words)
+        list_words = message.split('-')
+        list_length = len(list_words)
+        for i in range(0, list_length):
+            list_text = font_type.render(list_words[i].strip(), True, font_color)
+            screen.blit(list_text, (x, y + 65 * i))
+    else:
+        screen.blit(text, (x, y))
+
+
 def draw_button_with_background(
         width: int, height: int,
         border_width: int | None, border_color: tuple[int, int, int] | str | None,

@@ -1,5 +1,6 @@
 import pygame
 
+from screens.question import QuestionScreen
 from screens.abstract import AbstractScreen
 from util import load_image, draw_button_with_background
 from constants import window_width, window_height
@@ -34,8 +35,7 @@ class ChooseDifficultyScreen(AbstractScreen):
                         self.change_cursor_position(d_x=-1)
 
                     if event.key == pygame.K_RETURN:
-                        pass
-                        # self.runner.change_screen(TeamChoosingScreen(screen=self.screen, runner=self.runner))
+                        self.runner.change_screen(QuestionScreen(screen=self.screen, runner=self.runner, difficulty=self.difficulty))
 
     @property
     def difficulty(self):
