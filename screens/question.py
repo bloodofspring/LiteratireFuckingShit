@@ -5,6 +5,8 @@ import pygame
 import constants
 import util
 from constants import window_width, window_height
+from screens.credits import CreditsScreen
+from screens.gameOver import GameOverScreen
 from screens.abstract import AbstractScreen
 from util import load_image, draw_button_with_background
 
@@ -40,16 +42,17 @@ class QuestionScreen(AbstractScreen):
                         self.change_screen_according_to_answer()
 
     def change_screen_according_to_answer(self, force_fail: bool = False):
+        if self.current_question_id + 1 >= len(self.questions):
+            self.runner.change_screen(CreditsScreen(screen=self.screen, runner=self.runner, score=self.score))
+            return
+
         if force_fail or self.cur_ypos + 1 != self.questions[self.current_question_id].correct_answer_id:
-            print("FAIL")
+            self.runner.change_screen(GameOverScreen(screen=self.screen, runner=self.runner))
             return
 
         self.current_question_id += 1
         self.score += 1
         self.time_left = constants.difficulty_to_time[self.difficulty]
-
-        if self.current_question_id >= len(self.questions):
-            print("YOU WON")
 
     def display_question_text(self):
         util.print_text(self.screen, self.questions[self.current_question_id].text, 25, 80, 20)

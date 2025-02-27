@@ -1,5 +1,6 @@
 import pygame
 
+import constants
 from screens.question import QuestionScreen
 from screens.abstract import AbstractScreen
 from util import load_image, draw_button_with_background
@@ -93,8 +94,12 @@ class ChooseDifficultyScreen(AbstractScreen):
         self.handle_events(events)
 
         self.screen.fill((255, 255, 255))
-
         self.screen.blit(self.background, (0, 0))
+        surface = pygame.Surface((constants.window_width, constants.window_height))
+        surface.set_alpha(64)
+        surface.fill((32, 32, 32))
+        self.screen.blit(surface, (0, 0))
+
         self.screen.blit(self.title_text_1, (25, 50))
 
         self.display_buttons()
